@@ -32,6 +32,15 @@ exports[`<App /> snapshot 1`] = `
     type="number"
     value="1"
   />
-  <div />
+  <div>
+    <img
+      alt="Dog"
+      src="foo.jpg"
+    />
+    <img
+      alt="Dog"
+      src="bar.jpg"
+    />
+  </div>
 </DocumentFragment>
 `;

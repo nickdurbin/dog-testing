@@ -4,14 +4,26 @@ import * as rtl from "@testing-library/react";
 // not importing to a variable, since this just overrides jest global variables
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
+import { JestEnvironment } from "@jest/environment";
+
+jest.mock('axios', () => {
+  return {
+    get: jest.fn(() => Promise.resolve({
+      data: {
+        message: ['foo.jpg', 'bar.jpg']
+      }
+    }))
+  }
+})
 
 // this just allows react-testing-library to do some
 // routine cleanup after each test runs (to reset the DOM and such)
 afterEach(rtl.cleanup);
 
-test("Render the heading", () => {
+test("Render the heading", async () => {
   // render our React app into an in-memory DOM so we can test against it
   const wrapper = rtl.render(<App />);
+  await wrapper.findAllByAltText(/dog/i);
 
   // element is now our dom element that we can test against
   const element = wrapper.getByText(/the dog website/i);
@@ -29,8 +41,8 @@ test("Render count input", () => {
   expect(element).toHaveValue(1);
 });
 
-test("<App /> snapshot", () => {
+test("<App /> snapshot", async () => {
   const wrapper = rtl.render(<App />)
-
+  await wrapper.findAllByAltText(/dog/i);
   expect(wrapper.asFragment()).toMatchSnapshot()
 })
