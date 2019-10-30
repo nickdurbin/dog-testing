@@ -28,3 +28,7 @@ test("Render count input", () => {
   const element = wrapper.getByPlaceholderText(/count/i);
   expect(element).toHaveValue(1);
 });
+
+test("<App /> snapshot", () => {
+  const wrapper = rtl.render(<App />)
+})
