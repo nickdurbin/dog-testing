@@ -31,4 +31,6 @@ test("Render count input", () => {
 
 test("<App /> snapshot", () => {
   const wrapper = rtl.render(<App />)
+
+  expect(wrapper.asFragment()).toMatchSnapshot()
 })

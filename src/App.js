@@ -25,7 +25,7 @@ function App(props) {
 
       <input
         type="number"
-        placeholder="Image Count"
+        placeholder="Count"
         value={count}
         onChange={e => setCount(e.target.value)}
       />
