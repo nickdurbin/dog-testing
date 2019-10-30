@@ -9,7 +9,7 @@ function App(props) {
   const [count, setCount] = useLocalStorage("count", 1);
 
   // since we're not testing our side effects yet, just comment this out
-  const [images] = useDogImages(breed, count);
+  const [images, setImages] = useDogImages(breed, count);
 
   return (
     <>
@@ -34,6 +34,10 @@ function App(props) {
           <img key={index} src={image} alt="Dog" />
         ))}
       </div>
+
+      <button onClick={() => setImages([])}>
+        Clear Images
+      </button>
     </>
   );
 }

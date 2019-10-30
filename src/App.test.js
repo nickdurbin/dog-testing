@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 // no default export, so we're importing everyting from this library
 import * as rtl from "@testing-library/react";
 // not importing to a variable, since this just overrides jest global variables
@@ -19,6 +20,13 @@ jest.mock('axios', () => {
 // this just allows react-testing-library to do some
 // routine cleanup after each test runs (to reset the DOM and such)
 afterEach(rtl.cleanup);
+
+test("Made API call", async () => {
+  const wrapper = rtl.render(<App />)
+  await wrapper.findAllByAltText(/dog/i);
+  
+  expect(axios.get).toHaveBeenCalled()
+})
 
 test("Render the heading", async () => {
   // render our React app into an in-memory DOM so we can test against it

@@ -1,5 +1,8 @@
 import wait from './wait';
 
+// pre-written mock from jest
+jest.useFakeTimers()
+
 // Method one for async tests
 // test("wait for promise to resolve", (done) => {
 //   wait(1).then(result => {
@@ -20,6 +23,14 @@ import wait from './wait';
 
 // Method three for async tests
 test("wait for promise to resolve", async () => {
-  const result = await wait(1)
-    expect(result).toBe("hurray")
+  const spy = jest.fn()
+  const waitFn = wait(1, spy)
+
+  //fast forward in time
+  jest.runAllTimers()
+  const result = await waitFn
+
+  expect(result).toBe("hurray")
+  expect(spy).toHaveBeenCalledWith("hurray")
+  expect(spy).toHaveBeenCalledTimes(1)
 })
